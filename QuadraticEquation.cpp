@@ -19,8 +19,10 @@ class QuadraticEquation
         if( D > eps )
         {
             D = sqrt(D);
-            return std::tuple(2, (-b - D) / a, (-b + D) / a);
+            return std::tuple(2, (-b - D)/a, (-b + D)/a);
         }
+        else
+            return std::tuple(1, -b/a, -b/a);
     }
 };
 
@@ -52,5 +54,14 @@ TEST_F(test_QuadraticEquation, test_solve_2_roots)
     EXPECT_EQ(2, std::get<0>(res));
     EXPECT_NEAR(-1, std::get<1>(res), 1.0e-15);
     EXPECT_NEAR( 1, std::get<2>(res), 1.0e-15);
-
 }
+
+TEST_F(test_QuadraticEquation, test_solve_1_roots)
+{
+    auto res = Test_QuadraticEquation::solve(1, 2, 1);
+
+    EXPECT_EQ(1, std::get<0>(res));
+    EXPECT_NEAR(-1, std::get<1>(res), 1.0e-15);
+    EXPECT_EQ(std::get<1>(res), std::get<2>(res));
+}
+
