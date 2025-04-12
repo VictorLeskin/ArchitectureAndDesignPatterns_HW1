@@ -11,6 +11,12 @@ class QuadraticEquation
 
     static std::tuple<int, double, double> solve(double a, double b, double c)
     {
+        if( std::isnan(a) || std::isinf(a) )
+            throw(std::invalid_argument("Invalid argument"));
+        if (std::isnan(b) || std::isinf(b))
+            throw(std::invalid_argument("Invalid argument"));
+        if (std::isnan(c) || std::isinf(c))
+            throw(std::invalid_argument("Invalid argument"));
         if (fabs(a) < eps)
             throw(std::domain_error("Leading coeff should not be 0"));
 
@@ -119,3 +125,38 @@ TEST_F(test_QuadraticEquation, test_small_negative_disriminant)
     EXPECT_EQ(std::get<1>(res), std::get<2>(res));
 }
 
+
+TEST_F(test_QuadraticEquation, test_coefficients_are_normal)
+{
+    auto run_test = [](double a, double b, double c)
+        {
+            EXPECT_THROW({
+                try
+                {
+                    auto res = Test_QuadraticEquation::solve(a, b, c);
+                }
+                catch (const std::invalid_argument& e)
+                {
+                    // and this tests that it has the correct message
+                    EXPECT_STREQ("Invalid argument", e.what());
+                    throw;
+                }
+                }, std::invalid_argument);
+        };
+
+
+    constexpr const double k_inf = std::numeric_limits<double>::infinity();
+    constexpr const double k_nan = std::numeric_limits<double>::infinity();
+
+   run_test( k_nan, 2, 1);
+   run_test( k_inf, 2, 1);
+   run_test(-k_inf, 2, 1);
+
+   run_test(1,  k_nan, 1);
+   run_test(1,  k_inf, 1);
+   run_test(1, -k_inf, 1);
+
+   run_test(1, 2,  k_nan);
+   run_test(1, 2,  k_inf);
+   run_test(1, 2, -k_inf);
+}
