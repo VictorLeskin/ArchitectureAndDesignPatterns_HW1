@@ -30,3 +30,16 @@
 *.exe
 *.out
 *.app
+/CMakeFiles
+/_deps
+/ALL_BUILD.vcxproj
+/ALL_BUILD.vcxproj.filters
+/ALL_BUILD.vcxproj.user
+/ArchitectureAndDesignPatterns_HW1.sln
+/CMakeCache.txt
+/cmake_install.cmake
+/INSTALL.vcxproj
+/INSTALL.vcxproj.filters
+/ZERO_CHECK.vcxproj
+/ZERO_CHECK.vcxproj.filters
+/.vs/ArchitectureAndDesignPatterns_HW1
