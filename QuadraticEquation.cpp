@@ -1,8 +1,18 @@
 #include <gtest/gtest.h>
-#include <gmock/gmock.h>
+
+#include <tuple>
 
 class QuadraticEquation
 {
+    public:
+    static std::tuple<int, double, double> solve(double a, double b, double c)
+    {
+        double D = b * b - 4 * a * c;
+        if (D < 0)
+            return std::tuple(0,0,0);
+
+        return std::tuple(99, 0, 0);
+    }
 };
 
 // gTest grouping class
@@ -15,13 +25,15 @@ public:
     public:
         // add here members for free access.
         using QuadraticEquation::QuadraticEquation; // delegate constructors
-    };
 
+    };
 };
 
-TEST_F(test_QuadraticEquation, test_ctor)
+TEST_F(test_QuadraticEquation, test_solve_no_roots )
 {
-    Test_QuadraticEquation t;
+    auto res = Test_QuadraticEquation::solve(1, 0, 1);
+
+    EXPECT_EQ(0, std::get<0>(res));
 }
 
 
