@@ -11,6 +11,9 @@ class QuadraticEquation
 
     static std::tuple<int, double, double> solve(double a, double b, double c)
     {
+        if (fabs(a) < eps)
+            throw(std::domain_error("Leading coeff should not be 0"));
+
         double D = b * b - 4 * a * c;
         if (D < -eps)
             return std::tuple(0,0,0);
@@ -65,3 +68,35 @@ TEST_F(test_QuadraticEquation, test_solve_1_roots)
     EXPECT_EQ(std::get<1>(res), std::get<2>(res));
 }
 
+
+TEST_F(test_QuadraticEquation, test_solve_leading_coefficient_is_0 )
+{
+    // -eps < a = 0.9999*eps < eps
+    EXPECT_THROW({
+            try
+            {
+                auto res = Test_QuadraticEquation::solve(0.9999 * 1.0e-15, 2, 1);
+            }
+            catch (const std::domain_error& e)
+            {
+                // and this tests that it has the correct message
+                EXPECT_STREQ("Leading coeff should not be 0", e.what());
+                throw;
+            }
+        }, std::domain_error);
+
+    // -eps < a = -0.9999*eps < eps
+    EXPECT_THROW({
+            try
+            {
+                auto res = Test_QuadraticEquation::solve(-0.9999 * 1.0e-15, 2, 1);
+            }
+            catch (const std::domain_error& e)
+            {
+                // and this tests that it has the correct message
+                EXPECT_STREQ("Leading coeff should not be 0", e.what());
+                throw;
+            }
+        }, std::domain_error);
+
+}
