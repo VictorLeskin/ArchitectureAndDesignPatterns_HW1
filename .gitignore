@@ -43,3 +43,17 @@
 /ZERO_CHECK.vcxproj
 /ZERO_CHECK.vcxproj.filters
 /.vs/ArchitectureAndDesignPatterns_HW1
+/lib/Debug
+/x64/Debug
+/Debug
+/QuadraticEquation.dir/Debug
+/QuadraticEquation.vcxproj.filters
+/QuadraticEquation[1]_include.cmake
+/QuadraticEquation[1]_tests.cmake
+/RUN_TESTS.vcxproj
+/RUN_TESTS.vcxproj.filters
+/QuadraticEquation[1]_include.cmake
+/QuadraticEquation[1]_tests.cmake
+/CTestTestfile.cmake
+/QuadraticEquation[1]_include.cmake
+/QuadraticEquation[1]_tests.cmake
