@@ -24,7 +24,8 @@ add_executable(
 target_link_libraries(
   QuadraticEquation
   GTest::gtest_main
+  GTest::gmock_main
 )
 
-include(GoogleTest)
+include(GoogleTest GoogleMock)
 gtest_discover_tests(QuadraticEquation)
