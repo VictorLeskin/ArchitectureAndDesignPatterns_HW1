@@ -100,3 +100,22 @@ TEST_F(test_QuadraticEquation, test_solve_leading_coefficient_is_0 )
         }, std::domain_error);
 
 }
+
+TEST_F(test_QuadraticEquation, test_small_positive_disriminant)
+{
+    auto res = Test_QuadraticEquation::solve(1- 1.0e-15/4.01, 2, 1);
+
+    EXPECT_EQ(1, std::get<0>(res));
+    EXPECT_NEAR(-1, std::get<1>(res), 1.0e-15);
+    EXPECT_EQ(std::get<1>(res), std::get<2>(res));
+}
+
+TEST_F(test_QuadraticEquation, test_small_negative_disriminant)
+{
+    auto res = Test_QuadraticEquation::solve(1 + 1.0e-15 / 4.01, 2, 1);
+
+    EXPECT_EQ(1, std::get<0>(res));
+    EXPECT_NEAR(-1, std::get<1>(res), 1.0e-15);
+    EXPECT_EQ(std::get<1>(res), std::get<2>(res));
+}
+
