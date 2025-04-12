@@ -21,7 +21,6 @@ public:
 TEST_F(test_QuadraticEquation, test_ctor)
 {
     Test_QuadraticEquation t;
-    FAIL() << "Just testing";
 }
 
 
